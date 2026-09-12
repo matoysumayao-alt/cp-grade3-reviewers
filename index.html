@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rocio's Grade 3 Reviewers</title>
+
+<style>
+body{
+  margin:0;
+  font-family:"Trebuchet MS",Arial,sans-serif;
+  background:linear-gradient(135deg,#fff7cf,#fff0f6,#eaf7ff);
+  color:#183153;
+}
+
+.wrap{
+  max-width:850px;
+  margin:auto;
+  padding:45px 20px;
+  text-align:center;
+}
+
+h1{
+  font-size:clamp(2.2rem,6vw,3.5rem);
+  margin-bottom:8px;
+}
+
+.subtitle{
+  font-size:1.2rem;
+  font-weight:bold;
+  margin-bottom:35px;
+}
+
+.subjects{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
+
+.subject{
+  display:block;
+  padding:35px 15px;
+  background:white;
+  border-radius:24px;
+  text-decoration:none;
+  color:#183153;
+  font-size:1.5rem;
+  font-weight:bold;
+  box-shadow:0 8px 25px rgba(24,49,83,.10);
+  transition:.2s;
+}
+
+.subject:hover{
+  transform:translateY(-4px);
+}
+
+.icon{
+  display:block;
+  font-size:3.2rem;
+  margin-bottom:10px;
+}
+
+.note{
+  margin-top:30px;
+  font-weight:bold;
+  color:#5b6e83;
+}
+
+@media(max-width:600px){
+  .subjects{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<h1>🌟 Hi, Rocio!</h1>
+
+<div class="subtitle">
+What would you like to study today?
+</div>
+
+<div class="subjects">
+
+<a class="subject" href="language.html">
+<span class="icon">📘</span>
+Language
+</a>
+
+<a class="subject" href="civics.html">
+<span class="icon">🇵🇭</span>
+Civics
+</a>
+
+<a class="subject" href="filipino.html">
+<span class="icon">🗣️</span>
+Filipino
+</a>
+
+<a class="subject" href="science.html">
+<span class="icon">🌱</span>
+Science
+</a>
+
+</div>
+
+<div class="note">
+📚 Learn • 🎮 Practice • 🎯 Take today's quiz • 📊 Track your progress
+</div>
+
+</div>
+
+</body>
+</html>
