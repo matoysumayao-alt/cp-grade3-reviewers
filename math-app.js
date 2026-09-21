@@ -65,8 +65,15 @@
   function makeSet(quotas) {
     var out = [];
     Object.keys(quotas).forEach(function (topic) {
+      var quota = quotas[topic];
       var pool = shuffle(D.questions.filter(function (q) { return q.topic === topic; }));
-      out = out.concat(pool.slice(0, quotas[topic]));
+      var chosen = [];
+      var visualIndex = pool.findIndex(function (q) { return !!q.image; });
+      if (quota > 0 && visualIndex >= 0) {
+        chosen.push(pool.splice(visualIndex, 1)[0]);
+      }
+      chosen = chosen.concat(pool.slice(0, Math.max(0, quota - chosen.length)));
+      out = out.concat(chosen);
     });
     return shuffle(out);
   }
@@ -122,6 +129,12 @@
 
     var h = '<span class="topic">' + esc(q.topic) + '</span><span class="difficulty">' + esc(q.difficulty || '') + '</span>' +
       '<div class="question">' + esc(q.q) + '</div>';
+
+    if (q.image) {
+      h += '<figure class="question-visual"><img src="' + esc(q.image) + '" alt="' + esc(q.imageAlt || 'Math geometry diagram') + '" loading="lazy">' +
+        (q.caption ? '<figcaption class="question-caption">' + esc(q.caption) + '</figcaption>' : '') +
+        '</figure>';
+    }
 
     if (q.type === 'text') {
       h += '<div class="textrow"><input type="text" inputmode="decimal" autocomplete="off" autocapitalize="off" spellcheck="false" id="' + m + 'I" aria-label="Type your answer" placeholder="Type your answer">' +
