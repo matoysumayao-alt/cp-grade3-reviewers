@@ -81,11 +81,12 @@
     }).join('');
   }
 
-  function makeSet(quotas) {
+  function makeSet(quotas, randomFn) {
     var out = [];
+    var rand = randomFn || Math.random;
     Object.keys(quotas).forEach(function (topic) {
       var quota = quotas[topic];
-      var pool = shuffle(D.questions.filter(function (q) { return q.topic === topic; }));
+      var pool = shuffle(D.questions.filter(function (q) { return q.topic === topic; }), rand);
       var chosen = [];
       var visualIndex = pool.findIndex(function (q) { return !!q.image; });
       if (quota > 0 && visualIndex >= 0) {
@@ -94,10 +95,14 @@
       chosen = chosen.concat(pool.slice(0, Math.max(0, quota - chosen.length)));
       out = out.concat(chosen);
     });
-    return shuffle(out);
+    return shuffle(out, rand);
   }
-  function dailySet() { return makeSet(D.dailyQuotas); }
-  function practiceSet() { return makeSet(D.practiceQuotas); }
+  function dailySet() {
+    return makeSet(D.dailyQuotas, rng(hash(D.slug + '|' + dateKey())));
+  }
+  function practiceSet() {
+    return makeSet(D.practiceQuotas, Math.random);
+  }
   function mistakeSet() {
     var map = {};
     D.questions.forEach(function (q) { map[q.id] = q; });
